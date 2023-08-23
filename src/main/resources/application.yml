@@ -1,0 +1,42 @@
+spring: #spring서버 설정이란의미
+  config:
+    activate:
+      on-profile: local #이후 내용들은 특정 profile에서 실행되도록 셋팅(config,activate,on-Profile)
+
+  datasource: #datasource는 데이터베이스를 의미
+    url: "jdbc:h2:mem:library;MODE=MYSQL;NON_KEYWORDS=USER" #jdbc는 자바 데이터베이스 커넥터(자바가 데이터베이스에 연결할 수 있게끔하는 미리 만들어진 커넥터), 데이터베이스 종류는 H2, mem은 메모리에 데이터 올라간다는의미(h2는 원래 메모리에서 동작), 마지막 경로는 데이터베이스 프로그램 안의 어떤 데이터 베이스인지, MODE=MYSQL는 H2를 최대한 MYSQL과 비슷하게 사용, NON_KEYWORDS=USER는 h2에서 예약어라 테이블중 user는 예약어가 아니라는의미
+    username: "sa" #데이터베이스 접속 정보
+    password: ""
+    driver-class-name: org.h2.Driver #데이터베이스를 접근할 때 사용할 프로그램(클래스)
+  jpa:
+    hibernate:
+      ddl-auto: create #스프링이 시작할때 DB에 있는 테이블과 매핑된 객체가 상이할 때 어떻게 처리할지(무시,경고얼럿,테이블을 자동변경 등)
+      #create는 local에서만 사용(기존 테이블 drop하고 테이블을 새로생성하는 옵션임)
+    properties:
+      hibernate:
+        show_sql: true #jpa를 사용해 DB에 SQL을 날릴때 SQL을 보여줄건지
+        format_sql: true #SQL을 보여줄때 예쁘게 포맷팅 할 것인가
+        dialect: org.hibernate.dialect.H2Dialect #방언,사투리라는 뜻, 이 옵션으로 DB을 특정하면 조금씩 다른 SQL을 수정해준다.(h2생략안됨,기본적으로 생략가능하나 자동감지 안되면 직접설정필요)
+  h2:
+    console:
+      enabled: true #h2의 console에 접속이 가능토록함
+      path: /h2-console
+--- #구분선
+spring: #spring서버 설정이란의미
+  config:
+    activate:
+      on-profile: dev #이후 내용들은 특정 profile에서 실행되도록 셋팅(config,activate,on-Profile)
+
+  datasource: #datasource는 데이터베이스를 의미
+    url: "jdbc:mysql://localhost/library" #jdbc는 자바 데이터베이스 커넥터(자바가 데이터베이스에 연결할 수 있게끔하는 미리 만들어진 커넥터), 데이터베이스 종류는 mysql, localhost는 데이터 베이스 주소, 마지막 경로는 데이터베이스 프로그램 안의 어떤 데이터 베이스인지
+    username: "root" #데이터베이스 접속 정보
+    password: "1234"
+    driver-class-name: com.mysql.cj.jdbc.Driver #데이터베이스를 접근할 때 사용할 프로그램(클래스)
+  jpa:
+    hibernate:
+      ddl-auto: none #스프링이 시작할때 DB에 있는 테이블과 매핑된 객체가 상이할 때 어떻게 처리할지(무시,경고얼럿,테이블을 자동변경 등)
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        #dialect: org.hibernate.dialect.MySQL8Dialect
