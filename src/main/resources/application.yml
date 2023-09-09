@@ -30,7 +30,7 @@ spring: #spring서버 설정이란의미
   datasource: #datasource는 데이터베이스를 의미
     url: "jdbc:mysql://localhost/library" #jdbc는 자바 데이터베이스 커넥터(자바가 데이터베이스에 연결할 수 있게끔하는 미리 만들어진 커넥터), 데이터베이스 종류는 mysql, localhost는 데이터 베이스 주소, 마지막 경로는 데이터베이스 프로그램 안의 어떤 데이터 베이스인지
     username: "root" #데이터베이스 접속 정보
-    password: "1234"
+    password: "Abcd1234!"
     driver-class-name: com.mysql.cj.jdbc.Driver #데이터베이스를 접근할 때 사용할 프로그램(클래스)
   jpa:
     hibernate:
